@@ -13,23 +13,25 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
 
-            // AddCarTest();
+             //AddCarTest();
 
-            CarAllList();
-            Console.WriteLine("\n");
-            ColorList();
-            Console.WriteLine("\n");
-            UserList();
-            Console.WriteLine("\n");
-            CustomerList();
-            Console.WriteLine("\n");
-            RentalList();
-            Console.WriteLine("\n");
-            AddToRental();
+            //CarAllList();
+            //Console.WriteLine("\n");
+            //ColorList();
+            //Console.WriteLine("\n");
+            //UserList();
+            //Console.WriteLine("\n");
+            //CustomerList();
+            //Console.WriteLine("\n");
+            //RentalList();
+            //Console.WriteLine("\n");
+            //AddToRental();
 
         }
         private static void AddToRental()
         {
+            Console.WriteLine("***** KİRALAMA EKLEME *****\n");
+
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
             string _tempCustomer;
@@ -64,17 +66,19 @@ namespace ConsoleUI
 
         private static void RentalList()
         {
+            Console.WriteLine("***** KİRALAMA LİSTESİ *****\n");
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
             //rentalManager.Add(new Rental {Id=3,CarId=2,CustomerId=2,RentDate=DateTime.Now, ReturnDate=null });
             foreach (var rental in rentalManager.GetAll().Data)
             {
-                Console.WriteLine(rental.Id + " " +rental.CustomerId+" "+rental.CarId +" " + rental.RentDate + " " + rental.ReturnDate);
+                Console.WriteLine("Kiralama Id : "+rental.Id + " " +"Customer Id : "+rental.CustomerId+" "+"Car Id : "+rental.CarId +" " + "Kiralama Tarihi :"+rental.RentDate + " " + "Geri geliş tarihi: "+rental.ReturnDate);
             }
         }
 
         private static void UserList()
         {
+            Console.WriteLine("***** KULLANICILARIN LİSTESİ *****\n");
             UserManager usermanager = new UserManager(new EfUserDal());
             foreach (var user in usermanager.GetAll().Data)
             {
@@ -84,8 +88,9 @@ namespace ConsoleUI
 
         private static void ColorList()
         {
+            Console.WriteLine("***** RENKLERİN LİSTESİ *****\n");
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorId + " - " + color.ColorName);
             }
@@ -93,6 +98,7 @@ namespace ConsoleUI
 
         private static void CustomerList()
         {
+            Console.WriteLine("***** MÜŞTERİLERİN LİSTESİ***** ");
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             foreach (var customer in customerManager.GetAll().Data)
             {
@@ -102,14 +108,15 @@ namespace ConsoleUI
 
         private static void CarAllList()
         {
-            CarManager carManager = new CarManager(new EfCarDal(), new RuleManager());
+            Console.WriteLine("***** ARABALARIN LİSTESİ *****\n");
+            CarManager carManager = new CarManager(new EfCarDal());
 
             var result = carManager.GetAll();
             if (result.Success == true)
             {
                 foreach (var car in result.Data)
                 {
-                    Console.WriteLine("Car ID: "+car.CarId + " --- " +car.Description + "Brand ID: "+car.BrandId+"  Günlük Ücret: "+ car.DailyPrice+" Color ID : "+car.ColorId);
+                    Console.WriteLine("Car ID: "+car.CarId + " --- " +car.Description+ " "+ "Brand ID: "+car.BrandId+"  Günlük Ücret: "+ car.DailyPrice+" Color ID : "+car.ColorId);
                 }
             }
             else
@@ -120,21 +127,11 @@ namespace ConsoleUI
 
         private static void AddCarTest()
         {
-            IRuleService<IEntity> rulesService = new RuleManager();
-
-            //carManager.Add(new Car { BrandId = 1, ColorId = 1, DailyPrice = 300, ModelYear = "2006", Description = "AUDI" });
-            Car car1 = new Car
-            {   
-                BrandId = 2,
-                ColorId = 2,
-                DailyPrice = 100,
-                ModelYear = "2017",
-                Description = "Tesla"
-            };
-
-            ICarService carManager = new CarManager(new EfCarDal(), new RuleManager());
-
-            carManager.Add(car1);
+           
+            ICarService carManager = new CarManager(new EfCarDal());
+           carManager.Add(new Car { BrandId = 8, ColorId = 1, DailyPrice = 300, ModelYear = "2006", Description = "Nissan" });
+            
+   
             var result = carManager.GetAll();
             if (result.Success)
             {

@@ -26,7 +26,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserAdded);
         }
 
-        public IResult Delet(User user)
+        public IResult Delete(User user)
         {
             if (user.Id!=0)
             {

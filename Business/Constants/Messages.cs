@@ -7,7 +7,7 @@ namespace Business.Constants
     public class Messages
     {
         public static string CarAdded = "Araç eklendi.";
-        public static string CarNameInVAlid = "Araç ismi geçersiz!!!.";
+        public static string CarNameInValid = "Araç ismi geçersiz!!!.";
         internal static string MaintenanceTime = "Sistem bakımda!!!";
         internal static string CarListed = "Araçlar listelendi.";
 

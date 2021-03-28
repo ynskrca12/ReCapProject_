@@ -14,13 +14,11 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-        IRuleService<IEntity> _rules;
+        
        
-        public CarManager(ICarDal carDal, IRuleService<IEntity> ruleService)
+        public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
-            _rules = ruleService;
-
         }
 
 
@@ -28,11 +26,9 @@ namespace Business.Concrete
         {
             //if (entity.Description.Length < 2)
             //{
-            //    return new ErrorResult(Messages.CarNameInVAlid);
+            //    return new ErrorResult(Messages.CarNameInValid);
             //}
 
-            _rules.MinNameRule(entity);
-            _rules.MinPriceRule(entity);
             _carDal.Add(entity);
             return new SuccessResult();
         }
