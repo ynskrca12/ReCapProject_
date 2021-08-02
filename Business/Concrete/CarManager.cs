@@ -1,6 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluetValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Entities;
@@ -26,6 +29,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car entity)
         {
@@ -36,6 +40,9 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        
+
+        [CacheAspect] //key,value
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour==22)

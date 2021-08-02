@@ -76,15 +76,15 @@ namespace ConsoleUI
             }
         }
 
-        private static void UserList()
-        {
-            Console.WriteLine("***** KULLANICILARIN LİSTESİ *****\n");
-            UserManager usermanager = new UserManager(new EfUserDal());
-            foreach (var user in usermanager.GetAll().Data)
-            {
-                Console.WriteLine(user.FirstName + " " + user.LastName + " " + user.Email);
-            }
-        }
+        //private static void UserList()
+        //{
+        //    Console.WriteLine("***** KULLANICILARIN LİSTESİ *****\n");
+        //    UserManager usermanager = new UserManager(new EfUserDal());
+        //    foreach (var user in usermanager.GetAll().Data)
+        //    {
+        //        Console.WriteLine(user.FirstName + " " + user.LastName + " " + user.Email);
+        //    }
+        //}
 
         private static void ColorList()
         {
